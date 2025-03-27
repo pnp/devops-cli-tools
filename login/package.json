@@ -1,0 +1,17 @@
+{
+  "name": "devops-cli-tasks.login",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "dependencies": {
+    "azure-devops-node-api": "^14.1.0",
+    "azure-pipelines-task-lib": "^5.0.0",
+    "azure-pipelines-tasks-artifacts-common": "^2.247.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.13.13",
+    "@types/q": "^1.5.8",
+    "sync-request": "^6.1.0",
+    "typescript": "^5.8.2"
+  }
+}

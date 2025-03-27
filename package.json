@@ -1,0 +1,26 @@
+{
+  "name": "devops-cli-tools",
+  "version": "0.1.0",
+  "description": "DevOps pipeline tasks to log in to a tenant and run commandline scripts using the CLI for Microsoft 365",
+  "keywords": [
+    "extensions",
+    "Azure DevOps",
+    "CLI for Microsoft 365"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p ./login --outDir ./login/dist",
+    "watch": "tsc -w -p ./login --outDir ./login/dist",
+    "clean": "rimraf ./login/dist",
+    "postbuild": "npm run package-extension -- --rev-version",
+    "package-extension": "tfx extension create --manifests vss-extension.json",
+    "publish-extension": "tfx extension publish --manifests vss-extension.json"
+  },
+  "dependencies": {
+    "azure-devops-extension-sdk": "^4.0.2"
+  },
+  "devDependencies": {
+    "tfx-cli": "^0.21.0",
+    "typescript": "5.8.2"
+  }
+}

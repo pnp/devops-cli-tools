@@ -1,0 +1,76 @@
+{
+    "manifestVersion": 1,
+    "id": "devops-cli-tools",
+    "publisher": "pnp",
+    "public": false,
+    "version": "0.1.0",
+    "name": "CLI for Microsoft 365 DevOps tools",
+    "description": "DevOps pipeline tasks to log in to a tenant and run commandline scripts using the CLI for Microsoft 365",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "tags": [
+        "cli-microsoft365",
+        "service-connection",
+        "federated-identity",
+        "powershell",
+        "bash"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "files": [
+        {
+            "path": "login"
+        },
+        {
+            "path": "docs",
+            "addressable": true
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "docs/Overview.md"
+        },
+        "license": {
+            "path": "LICENSE"
+        }
+    },
+    "icons": {
+        "default": "images/logo.png"
+    },
+    "links": {
+        "home": {
+            "uri": "https://github.com/pnp/devops-cli-tools"
+        },
+        "repository": {
+            "uri": "https://github.com/pnp/devops-cli-tools"
+        },
+        "issues": {
+            "uri": "https://github.com/pnp/devops-cli-tools/issues"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/pnp/devops-cli-tools"
+    },
+    "badges": [
+    ],
+    "contributions": [
+        {
+            "id": "devops-cli-login-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/devops-cli-login"
+            }
+        }
+    ],
+    "screenshots": [
+        
+    ]
+}

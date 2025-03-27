@@ -1,0 +1,62 @@
+{
+  "id": "87e27745-b435-4cb3-8c8d-c2fd72af8fd5",
+  "name": "devops-cli-login",
+  "friendlyName": "CLI for Microsoft 365 login task",
+  "description": "Login to a tenant using the CLI for Microsoft 365",
+  "author": "pnp",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "version": {
+    "Major": 0,
+    "Minor": 1,
+    "Patch": 0
+  },
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [
+  ],
+  "instanceNameFormat": "DevOps CLI Login",
+  "showEnvironmentVariables": true,
+  "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+  ],
+  "inputs": [
+    {
+      "name": "serviceConnection",
+      "type": "connectedService:Generic",
+      "label": "Service Connection",
+      "required": true,
+      "defaultValue": ""
+    },
+    {
+      "name": "appId",
+      "type": "string",
+      "label": "Client ID",
+      "required": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "tenantId",
+      "type": "string",
+      "label": "Client ID",
+      "required": false,
+      "defaultValue": ""
+    }
+  ],
+  "execution": {
+    "Node20_1": {
+      "target": "index.js",
+      "argumentFormat": ""
+    },
+    "Node20": {
+      "target": "index.js",
+      "argumentFormat": ""
+    }
+  }
+}
