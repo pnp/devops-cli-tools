@@ -12,6 +12,7 @@
     "build": "tsc -p ./login --outDir ./login/dist",
     "watch": "tsc -w -p ./login --outDir ./login/dist",
     "clean": "rimraf ./login/dist",
+    "test": "mocha ./login/dist/tests/_suite.js",
     "postbuild": "npm run package-extension -- --rev-version",
     "package-extension": "tfx extension create --manifests vss-extension.json",
     "publish-extension": "tfx extension publish --manifests vss-extension.json"

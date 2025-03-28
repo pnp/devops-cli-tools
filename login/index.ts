@@ -7,11 +7,9 @@ import { IExecSyncResult } from 'azure-pipelines-task-lib/toolrunner';
 
 async function run() {
     try {
-        const appIdInput: string | undefined = tl.getInput('appId', true);
-        const tenantIdInput: string | undefined = tl.getInput('tenantId', true);
         const serviceConnectionInput: string | undefined = tl.getInput('serviceConnection', true);
         
-        if (appIdInput == 'bad') {
+        if (serviceConnectionInput == 'bad') {
             tl.setResult(tl.TaskResult.Failed, 'Bad input was given');
             return;
         }
@@ -21,16 +19,14 @@ async function run() {
             return;
         }
 
-        login(serviceConnectionInput, appIdInput, tenantIdInput);
-
-        console.log('Hello', appIdInput);
+        login(serviceConnectionInput);
     }
     catch (err:any) {
         tl.setResult(tl.TaskResult.Failed, err.message);
     }
 }
 
-async function login(serviceConnection: string, appId?: string, tenantId?: string) {
+async function login(serviceConnection: string) {
     const authScheme = tl.getEndpointAuthorizationScheme(serviceConnection, true);
 
     if (!authScheme) {
@@ -41,6 +37,17 @@ async function login(serviceConnection: string, appId?: string, tenantId?: strin
         throw new Error("The service connection must be of type 'Workload Identity Federation'.");
     }
 
+    const servicePrincipalId = tl.getEndpointAuthorizationParameter(serviceConnection, "serviceprincipalid", false);
+    const tenantId = tl.getEndpointAuthorizationParameter(serviceConnection, "tenantid", false);
+    
+    if (!servicePrincipalId) {
+        throw new Error("The service principal Id of the service connection could not be determined.");
+    }
+    
+    if (!tenantId) {
+        throw new Error("The tenant Id of the service connection could not be determined.");
+    }
+    
     const federatedToken = await getIdToken(serviceConnection);
 
     const cliVersionResult: IExecSyncResult = tl.execSync("m365", "--version");
@@ -51,15 +58,7 @@ async function login(serviceConnection: string, appId?: string, tenantId?: strin
 
     // check version 10.5.0
 
-    let args = `login --authType federatedIdentity --federated-token "${federatedToken}"`;
-
-    if (appId) {
-        args += ` --appId "${appId}"`;
-    }
-
-    if (tenantId) {
-        args += ` --tenant "${tenantId}"`;
-    }
+    let args = `login --authType federatedIdentity --appId ${servicePrincipalId} --tenant ${tenantId} --federated-token "${federatedToken}"`;
 
     Utility.throwIfError(tl.execSync("m365", args), "Login failed...");
 }

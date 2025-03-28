@@ -5,7 +5,6 @@ import path = require('path');
 let taskPath = path.join(__dirname, '..', 'index.js');
 let tmr: tmrm.TaskMockRunner = new tmrm.TaskMockRunner(taskPath);
 
-tmr.setInput('appId', 'human');
-tmr.setInput('tenantId', 'human');
+tmr.setInput('serviceConnection', 'MyServiceConnection');
 
 tmr.run();
